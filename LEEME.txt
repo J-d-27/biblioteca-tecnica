@@ -1,0 +1,5 @@
+Biblioteca Técnica de Refrigeración
+
+Para instalarla como app PWA, publica esta carpeta en un alojamiento HTTPS (por ejemplo, GitHub Pages). Después abre la dirección HTTPS con Chrome en Android y usa el menú ⋮ > Instalar aplicación o Añadir a pantalla de inicio.
+
+El archivo index.html abierto directamente desde Descargas funciona como biblioteca, pero Android/Chrome no lo instala como PWA desde file://.

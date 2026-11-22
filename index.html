@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#123b55">
+<link rel="manifest" href="manifest.webmanifest">
+<title>Biblioteca Técnica de Refrigeración</title>
+<style>
+:root{--navy:#123b55;--blue:#176b87;--bg:#f2f6f8;--card:#fff;--ink:#18313d}
+*{box-sizing:border-box}body{margin:0;font:16px system-ui,Arial;background:var(--bg);color:var(--ink)}
+header{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;padding:24px 18px 20px}
+h1{font-size:23px;margin:0 0 7px}header p{margin:0;opacity:.9;font-size:14px}
+main{max-width:850px;margin:auto;padding:16px}
+.search{width:100%;padding:14px;border:1px solid #cbd8de;border-radius:12px;font-size:16px;margin:2px 0 15px}
+nav{display:flex;gap:8px;overflow:auto;padding-bottom:10px}
+nav button{white-space:nowrap;border:0;border-radius:20px;padding:9px 13px;background:#dce8ed;color:var(--navy);font-weight:650}
+nav button.active{background:var(--navy);color:white}
+h2{font-size:18px;margin:15px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.card{background:var(--card);border-radius:14px;padding:15px;box-shadow:0 2px 9px #16384b12}
+.card h3{margin:0 0 6px;font-size:16px}.card p{margin:0 0 12px;color:#536a75;font-size:14px;line-height:1.4}
+a.link{display:inline-block;color:#08658a;font-weight:650;text-decoration:none;margin:3px 12px 3px 0}
+.tag{font-size:11px;background:#e7f1f5;padding:4px 8px;border-radius:20px;display:inline-block;margin-bottom:8px}
+.note{font-size:13px;color:#637984;margin-top:18px;line-height:1.45}
+footer{text-align:center;color:#72848c;font-size:12px;padding:20px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+<h1>📘 Biblioteca Técnica de Refrigeración</h1>
+<p>Aplicaciones, diagnóstico, fabricantes y documentación técnica</p>
+</header>
+<main>
+<input id="search" class="search" type="search" placeholder="Buscar aplicación, fabricante o avería…">
+<nav id="tabs">
+<button class="active" data-cat="todos">Todo</button>
+<button data-cat="fabricantes">Fabricantes</button>
+<button data-cat="multimarca">Multimarca</button>
+<button data-cat="industrial">Frío industrial</button>
+<button data-cat="documentacion">Documentación</button>
+</nav>
+<h2 id="sectionTitle">Biblioteca de recursos</h2>
+<div id="items" class="grid"></div>
+<p class="note">Los enlaces de descarga abren la búsqueda correspondiente en Google Play o la web oficial. Comprueba siempre el desarrollador, la compatibilidad y los permisos antes de instalar una aplicación. Esta biblioteca es un índice de consulta, no sustituye los manuales del fabricante ni los procedimientos de seguridad.</p>
+</main>
+<footer>Biblioteca Técnica · Edición inicial</footer>
+<script>
+const resources=[
+{cat:"fabricantes",name:"ME Engineer",brand:"Mitsubishi Electric",desc:"Herramienta y recursos técnicos para equipos Mitsubishi Electric.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=ME%20Engineer%20Mitsubishi%20Electric&c=apps"],["Web oficial","https://www.mitsubishielectric.com/"]] },
+{cat:"fabricantes",name:"Daikin Service",brand:"Daikin",desc:"Recursos y herramientas de servicio para climatización Daikin.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=Daikin%20Service&c=apps"],["Portal Daikin","https://www.daikin.eu/"]] },
+{cat:"fabricantes",name:"MHI e-service",brand:"Mitsubishi Heavy Industries",desc:"Recursos de servicio para equipos Mitsubishi Heavy Industries.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=MHI%20e-service&c=apps"],["Web oficial","https://www.mhi.com/"]] },
+{cat:"multimarca",name:"Cold Doctor",brand:"Diagnóstico multimarca",desc:"Aplicación mencionada para consulta y apoyo en diagnóstico de climatización.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=Cold%20Doctor&c=apps"]] },
+{cat:"multimarca",name:"FixCode",brand:"Códigos de error",desc:"Búsqueda de la aplicación y recursos relacionados con códigos de avería.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=FixCode%20air%20conditioning&c=apps"]] },
+{cat:"multimarca",name:"AC Repair Guide",brand:"Reparación de climatización",desc:"Guías de consulta para reparación y diagnóstico de aire acondicionado.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=AC%20Repair%20Guide&c=apps"]] },
+{cat:"industrial",name:"CAREL APPLICA",brand:"CAREL",desc:"Configuración y puesta en marcha de dispositivos CAREL compatibles.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=CAREL%20APPLICA&c=apps"],["Web CAREL","https://www.carel.com/"]] },
+{cat:"industrial",name:"Danfoss Ref Tools",brand:"Danfoss",desc:"Herramientas de cálculo y consulta para refrigeración.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=Danfoss%20Ref%20Tools&c=apps"],["Web Danfoss","https://www.danfoss.com/"]] },
+{cat:"industrial",name:"CAREL RED control",brand:"CAREL",desc:"Aplicación de control y monitorización para sistemas compatibles.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=CAREL%20RED%20control&c=apps"]] },
+{cat:"industrial",name:"CAREL CONTROLLA",brand:"CAREL",desc:"Recursos de control CAREL para instalaciones compatibles.",links:[["Buscar en Google Play","https://play.google.com/store/search?q=CAREL%20CONTROLLA&c=apps"]] },
+{cat:"documentacion",name:"Dixell",brand:"Controladores de refrigeración",desc:"Documentación técnica, manuales y códigos para controladores Dixell.",links:[["Web oficial","https://www.dixell.com/"]] },
+{cat:"documentacion",name:"Eliwell",brand:"Controladores de refrigeración",desc:"Manuales y documentación de controladores Eliwell.",links:[["Web oficial","https://www.eliwell.com/"]] },
+{cat:"documentacion",name:"Parametrox",brand:"Consulta técnica",desc:"Recurso web mencionado anteriormente; verifica el contenido y su vigencia.",links:[["Abrir web","https://www.parametrox.com/"]] }
+];
+const labels={fabricantes:"Fabricantes",multimarca:"Multimarca",industrial:"Frío industrial",documentacion:"Documentación"};
+let category="todos";
+function render(){
+ const q=document.getElementById("search").value.toLowerCase().trim();
+ const filtered=resources.filter(r=>(category==="todos"||r.cat===category)&&[r.name,r.brand,r.desc].join(" ").toLowerCase().includes(q));
+ document.getElementById("sectionTitle").textContent=category==="todos"?"Biblioteca de recursos":labels[category];
+ document.getElementById("items").innerHTML=filtered.map(r=>`<article class="card"><span class="tag">${labels[r.cat]}</span><h3>${r.name}</h3><p><b>${r.brand}</b><br>${r.desc}</p>${r.links.map(l=>`<a class="link" href="${l[1]}" target="_blank" rel="noopener">${l[0]} ↗</a>`).join("")}</article>`).join("")||"<p>No hay resultados para esa búsqueda.</p>";
+}
+document.getElementById("search").addEventListener("input",render);
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");category=b.dataset.cat;render()}));
+if("serviceWorker" in navigator && location.protocol.startsWith("http")) navigator.serviceWorker.register("./sw.js").catch(()=>{});
+render();
+</script>
+</body></html>
