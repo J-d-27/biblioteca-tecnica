@@ -1,128 +1,148 @@
-
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Biblioteca Técnica</title>
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #eef2f5;
-  margin: 0;
-  color: #263746;
-}
-header {
-  background: #123b59;
-  color: white;
-  padding: 25px 15px;
-  text-align: center;
-}
-main {
-  padding: 15px;
-  max-width: 700px;
-  margin: auto;
-}
-.card {
-  background: white;
-  padding: 18px;
-  margin: 12px 0;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px #ccd3d9;
-}
-h2 { color: #12618a; font-size: 19px; }
-a {
-  display: block;
-  padding: 10px;
-  margin-top: 7px;
-  background: #e4f1f8;
-  border-radius: 7px;
-  color: #125078;
-  text-decoration: none;
-}
-footer {
-  text-align: center;
-  padding: 20px;
-  color: #657786;
-}
+body{font-family:Arial;background:#eef2f5;margin:0;color:#263746}
+header{background:#123b59;color:white;padding:22px;text-align:center}
+main{max-width:700px;margin:auto;padding:14px}
+.card{background:white;padding:17px;margin:13px 0;border-radius:12px;box-shadow:0 2px 6px #ccd3d9}
+h2{color:#12618a;font-size:19px}
+input,select{width:100%;padding:12px;margin:7px 0;box-sizing:border-box;border:1px solid #aaa;border-radius:7px;font-size:16px}
+button{background:#12618a;color:white;padding:12px;border:0;border-radius:7px;width:100%;font-size:16px;margin-top:8px}
+.result{background:#e4f1f8;padding:12px;border-radius:7px;margin-top:10px;font-weight:bold}
+a{display:block;padding:10px;margin-top:7px;background:#e4f1f8;border-radius:7px;color:#125078;text-decoration:none}
+small{color:#657786}
 </style>
 </head>
 <body>
-
 <header>
 <h1>📘 Biblioteca Técnica</h1>
 <p>Refrigeración · Climatización · Electricidad</p>
 </header>
-
 <main>
 
 <div class="card">
-<h2>🔧 1. Diagnóstico de averías</h2>
-<a href="#codigos">Códigos de error</a>
-<a href="#fabricantes">Diagnóstico por fabricantes</a>
+<h2>🔧 Conversor de presión</h2>
+<label>Introduce el valor</label>
+<input id="presion" type="number" step="any" placeholder="Ejemplo: 10">
+<label>Unidad de origen</label>
+<select id="unidad">
+<option value="bar">bar</option>
+<option value="psi">psi</option>
+<option value="mpa">MPa</option>
+</select>
+<button onclick="convertir()">Convertir presión</button>
+<div class="result" id="resultadoPresion">Aquí aparecerán los resultados</div>
 </div>
 
 <div class="card">
-<h2>❄️ 2. Refrigeración</h2>
-<a href="#refrigerantes">Tipos de refrigerantes</a>
-<a href="#presiones">Presiones y temperaturas</a>
-<a href="#componentes">Componentes frigoríficos</a>
+<h2>❄️ Calculadora de sobrecalentamiento</h2>
+<p>Temperatura del tubo de aspiración (°C)</p>
+<input id="tAspiracion" type="number" step="any" placeholder="Ejemplo: 12">
+<p>Temperatura de saturación de evaporación (°C)</p>
+<input id="tEvaporacion" type="number" step="any" placeholder="Ejemplo: 5">
+<button onclick="sobrecalentamiento()">Calcular</button>
+<div class="result" id="resultadoSobre">Resultado pendiente</div>
 </div>
 
 <div class="card">
-<h2>⚡ 3. Electricidad</h2>
-<a href="#electricidad">Esquemas eléctricos</a>
-<a href="#mediciones">Mediciones y comprobaciones</a>
+<h2>🌡️ Calculadora de subenfriamiento</h2>
+<p>Temperatura de saturación de condensación (°C)</p>
+<input id="tCondensacion" type="number" step="any" placeholder="Ejemplo: 40">
+<p>Temperatura del líquido (°C)</p>
+<input id="tLiquido" type="number" step="any" placeholder="Ejemplo: 35">
+<button onclick="subenfriamiento()">Calcular</button>
+<div class="result" id="resultadoSub">Resultado pendiente</div>
 </div>
 
 <div class="card">
-<h2>🏭 4. Fabricantes</h2>
+<h2>⚡ Ley de Ohm</h2>
+<p>Voltaje (V)</p>
+<input id="voltaje" type="number" step="any">
+<p>Resistencia (Ω)</p>
+<input id="resistencia" type="number" step="any">
+<button onclick="ohm()">Calcular intensidad</button>
+<div class="result" id="resultadoOhm">Resultado pendiente</div>
+</div>
+
+<div class="card">
+<h2>🔌 Conversor de potencia</h2>
+<p>Potencia en BTU/h</p>
+<input id="btu" type="number" step="any">
+<button onclick="potencia()">Convertir a kW</button>
+<div class="result" id="resultadoPotencia">Resultado pendiente</div>
+</div>
+
+<div class="card">
+<h2>📚 Fabricantes y documentación</h2>
 <a href="https://www.daikin.es/">Daikin</a>
 <a href="https://www.mitsubishielectric.es/">Mitsubishi Electric</a>
 <a href="https://www.fujitsu-general.com/es/">Fujitsu</a>
 <a href="https://www.midea.com/es">Midea</a>
 </div>
 
-<div class="card" id="codigos">
-<h2>📱 5. Aplicaciones técnicas</h2>
-<p>Aquí incorporaremos las aplicaciones para localizar averías y consultar códigos de error.</p>
-</div>
-
-<div class="card" id="refrigerantes">
+<div class="card">
 <h2>🧪 Refrigerantes</h2>
 <p>R32 · R410A · R134a · R744</p>
-</div>
-
-<div class="card" id="presiones">
-<h2>🌡️ Presiones y temperaturas</h2>
-<p>Incorporaremos tablas y herramientas de consulta.</p>
-</div>
-
-<div class="card" id="componentes">
-<h2>⚙️ Componentes frigoríficos</h2>
-<p>Compresores, válvulas, evaporadores y condensadores.</p>
-</div>
-
-<div class="card" id="electricidad">
-<h2>🔌 Electricidad y esquemas</h2>
-<p>Esquemas, conexiones y documentación técnica.</p>
-</div>
-
-<div class="card" id="mediciones">
-<h2>📏 Mediciones</h2>
-<p>Instrumentos y procedimientos de comprobación.</p>
-</div>
-
-<div class="card" id="fabricantes">
-<h2>📚 Manuales técnicos</h2>
-<p>Documentación de fabricantes.</p>
+<small>La temperatura de saturación debe obtenerse de la tabla presión-temperatura correspondiente al refrigerante y a la referencia de presión utilizada.</small>
 </div>
 
 </main>
-
-<footer>
-Biblioteca Técnica de Refrigeración · 2026
-</footer>
-
+<script>
+function numero(id){
+ return Number(document.getElementById(id).value);
+}
+function convertir(){
+ let v=numero("presion");
+ let u=document.getElementById("unidad").value;
+ if(!Number.isFinite(v)||document.getElementById("presion").value===""){
+ document.getElementById("resultadoPresion").innerText="Introduce un valor válido";
+ return;
+ }
+ let bar=u==="bar"?v:u==="psi"?v/14.5037738:v*10;
+ document.getElementById("resultadoPresion").innerHTML=
+ "bar: "+bar.toFixed(4)+"<br>psi: "+(bar*14.5037738).toFixed(3)+"<br>MPa: "+(bar/10).toFixed(5);
+}
+function sobrecalentamiento(){
+ let a=numero("tAspiracion"),e=numero("tEvaporacion");
+ if(document.getElementById("tAspiracion").value===""||document.getElementById("tEvaporacion").value===""){
+ document.getElementById("resultadoSobre").innerText="Completa ambas temperaturas";
+ return;
+ }
+ document.getElementById("resultadoSobre").innerText=
+ "Sobrecalentamiento: "+(a-e).toFixed(2)+" °C";
+}
+function subenfriamiento(){
+ let c=numero("tCondensacion"),l=numero("tLiquido");
+ if(document.getElementById("tCondensacion").value===""||document.getElementById("tLiquido").value===""){
+ document.getElementById("resultadoSub").innerText="Completa ambas temperaturas";
+ return;
+ }
+ document.getElementById("resultadoSub").innerText=
+ "Subenfriamiento: "+(c-l).toFixed(2)+" °C";
+}
+function ohm(){
+ let v=numero("voltaje"),r=numero("resistencia");
+ if(document.getElementById("voltaje").value===""||document.getElementById("resistencia").value===""||r===0){
+ document.getElementById("resultadoOhm").innerText="Introduce valores válidos y una resistencia distinta de cero";
+ return;
+ }
+ document.getElementById("resultadoOhm").innerText=
+ "Intensidad: "+(v/r).toFixed(3)+" A";
+}
+function potencia(){
+ let b=numero("btu");
+ if(document.getElementById("btu").value===""){
+ document.getElementById("resultadoPotencia").innerText="Introduce la potencia";
+ return;
+ }
+ document.getElementById("resultadoPotencia").innerText=
+ "Potencia: "+(b/3412.142).toFixed(3)+" kW";
+}
+</script>
 </body>
 </html>
+
